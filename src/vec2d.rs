@@ -1,7 +1,7 @@
 use std::fmt::{Display, Formatter};
 use std::ops::{Add, Sub};
 
-// Vector 2D
+/// A 2 dimensional integer vector
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct Vec2D(pub i32, pub i32);
 

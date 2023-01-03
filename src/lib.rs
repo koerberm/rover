@@ -6,6 +6,7 @@ use std::ops::{Add, Sub};
 mod direction;
 mod vec2d;
 
+/// A mars rover described by a position in a 2D grid and a direction (North,East,South,West)
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct Rover {
     position: Vec2D,
@@ -13,6 +14,7 @@ pub struct Rover {
 }
 
 impl Rover {
+    /// Creates a new rover at the given x and y coordinates facing the given direction
     pub fn new(x: i32, y: i32, direction: Direction) -> Self {
         let res = Self {
             position: Vec2D(x, y),
@@ -22,6 +24,7 @@ impl Rover {
         res
     }
 
+    /// Turns the given direction into a delta-vector for modifying the rover's position
     fn dir_to_vec(dir: Direction) -> Vec2D {
         match dir {
             Direction::North => Vec2D(0, 1),
@@ -31,6 +34,7 @@ impl Rover {
         }
     }
 
+    /// Moves the rover one step forward towards the current direction from the current position
     pub fn forward(self) -> Self {
         Self {
             position: self.position.add(Self::dir_to_vec(self.direction)),
@@ -38,6 +42,7 @@ impl Rover {
         }
     }
 
+    /// Moves the rover one step backward from the current direction from the current position
     pub fn backward(self) -> Self {
         Self {
             position: self.position.sub(Self::dir_to_vec(self.direction)),
@@ -45,6 +50,7 @@ impl Rover {
         }
     }
 
+    /// Turns the rover 90° to the right from the current direction
     pub fn turn_right(self) -> Self {
         Self {
             direction: self.direction.turn_right(),
@@ -52,6 +58,7 @@ impl Rover {
         }
     }
 
+    /// Turns the rover 90° to the left from the current direction
     pub fn turn_left(self) -> Self {
         Self {
             direction: self.direction.turn_left(),
